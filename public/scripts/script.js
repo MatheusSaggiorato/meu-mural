@@ -29,6 +29,22 @@ function updatePosts() {
 
 }
 
+button.disabled = true;
+
+function checkInputs() {
+    let title = document.getElementById("title").value;
+    let description = document.getElementById("desc").value;
+    let button = document.getElementById('button');
+
+    if (title && description != '') {
+        button.disabled = false;
+    }
+}
+
+setInterval(checkInputs, 500)
+
+
+
 function newPost() {
 
     let title = document.getElementById("title").value;
@@ -43,8 +59,7 @@ function newPost() {
 
     fetch("http://192.168.1.14:3000/api/new", options).then(res => {
         updatePosts();
-        document.getElementById("title").value = "";
-        document.getElementById("desc").value = "";
+        title.value = "";
+        description.value = "";
     })
-
 }
